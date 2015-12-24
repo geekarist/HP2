@@ -10,10 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> {
-    private final List<String> mBooks;
+    private final List<Book> mBooks;
 
     public ListBooksAdapter() {
-        mBooks = Arrays.asList("Henri Potier 1", "Henri Potier 2");
+        mBooks = Arrays.asList(
+                new Book("Henri Potier 1", "isbn", 10, "http://henri-potier.xebia.fr/hp0.jpg"),
+                new Book("Henri Potier 2", "isbn2", 20, "http://henri-potier.xebia.fr/hp1.jpg"));
     }
 
     @Override
@@ -26,7 +28,7 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
 
     @Override
     public void onBindViewHolder(ListBooksAdapter.ViewHolder holder, int position) {
-        holder.mTitleView.setText(mBooks.get(position));
+        holder.mTitleView.setText(mBooks.get(position).title);
     }
 
     @Override
@@ -36,6 +38,7 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleView;
+
         public ViewHolder(View itemView) {
             super(itemView);
             this.mTitleView = (TextView) itemView.findViewById(R.id.book_title_view);
