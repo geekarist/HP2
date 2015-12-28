@@ -11,18 +11,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> {
-    private final List<Book> mBooks;
+    private List<Book> mBooks;
     private Context mContext;
 
     public ListBooksAdapter(Context mContext) {
         this.mContext = mContext;
-        mBooks = Arrays.asList(
-                new Book("Henri Potier 1", "isbn", 10, "http://henri-potier.xebia.fr/hp0.jpg"),
-                new Book("Henri Potier 2", "isbn2", 20, "http://henri-potier.xebia.fr/hp1.jpg"));
+        mBooks = new ArrayList<>();
     }
 
     @Override
@@ -45,6 +44,10 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
     @Override
     public int getItemCount() {
         return mBooks.size();
+    }
+
+    public void setBooks(List<Book> books) {
+        mBooks = books;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HP2</string>
+    <string name="list_books_error">Error while fetching list of books</string>
 </resources>
