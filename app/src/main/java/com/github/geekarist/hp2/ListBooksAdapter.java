@@ -35,6 +35,7 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
     @Override
     public void onBindViewHolder(ListBooksAdapter.ViewHolder holder, int position) {
         holder.mTitleView.setText(mBooks.get(position).title);
+        holder.mPriceView.setText(mContext.getString(R.string.price, mBooks.get(position).price));
         Glide.with(mContext)
                 .load(mBooks.get(position).cover)
                 .placeholder(R.drawable.book_cover_placeholder)
@@ -52,11 +53,13 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleView;
+        public TextView mPriceView;
         public ImageView mImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.mTitleView = (TextView) itemView.findViewById(R.id.book_title_view);
+            this.mPriceView = (TextView) itemView.findViewById(R.id.book_price_view);
             this.mImageView = (ImageView) itemView.findViewById(R.id.book_image_view);
         }
     }
