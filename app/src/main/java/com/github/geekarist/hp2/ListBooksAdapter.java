@@ -1,12 +1,14 @@
 package com.github.geekarist.hp2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -33,13 +35,20 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ListBooksAdapter.ViewHolder holder, int position) {
-        holder.mTitleView.setText(mBooks.get(position).title);
-        holder.mPriceView.setText(mContext.getString(R.string.price, mBooks.get(position).price));
+    public void onBindViewHolder(ListBooksAdapter.ViewHolder holder, final int position) {
+        final Book book = mBooks.get(position);
+        holder.mTitleView.setText(book.title);
+        holder.mPriceView.setText(mContext.getString(R.string.price, book.price));
         Glide.with(mContext)
-                .load(mBooks.get(position).cover)
+                .load(book.cover)
                 .placeholder(R.drawable.book_cover_placeholder)
                 .into(holder.mImageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(BookDetailActivity.newIntent(mContext, book));
+            }
+        });
     }
 
     @Override

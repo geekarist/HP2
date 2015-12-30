@@ -24,15 +24,16 @@ public class ListBooksActivity extends AppCompatActivity {
     private ListBooksAdapter mBookListAdapter;
     private View mFixConnectivityView;
     private View mReloadButton;
+    private RecyclerView mBookListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_books);
-        RecyclerView bookListView = (RecyclerView) findViewById(R.id.book_list_view);
-        bookListView.setLayoutManager(new LinearLayoutManager(this));
+        mBookListView = (RecyclerView) findViewById(R.id.book_list_view);
+        mBookListView.setLayoutManager(new LinearLayoutManager(this));
         mBookListAdapter = new ListBooksAdapter(this);
-        bookListView.setAdapter(mBookListAdapter);
+        mBookListView.setAdapter(mBookListAdapter);
         mFixConnectivityView = findViewById(R.id.fix_connectivity_group);
         mReloadButton = findViewById(R.id.reload_button);
         mReloadButton.setOnClickListener(new View.OnClickListener() {
