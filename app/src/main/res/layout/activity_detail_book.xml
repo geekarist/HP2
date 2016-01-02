@@ -27,6 +27,7 @@
         tools:border="true" />
 
     <Button
+        android:id="@+id/book_detail_buy_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"

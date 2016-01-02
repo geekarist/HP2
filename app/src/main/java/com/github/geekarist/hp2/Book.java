@@ -6,10 +6,10 @@ import android.os.Parcelable;
 public class Book implements Parcelable {
     final String title;
     final String isbn;
-    final int price;
+    final double price;
     final String cover;
 
-    public Book(String title, String isbn, int price, String cover) {
+    public Book(String title, String isbn, double price, String cover) {
         this.title = title;
         this.isbn = isbn;
         this.price = price;
@@ -19,7 +19,7 @@ public class Book implements Parcelable {
     protected Book(Parcel in) {
         title = in.readString();
         isbn = in.readString();
-        price = in.readInt();
+        price = in.readDouble();
         cover = in.readString();
     }
 
@@ -27,7 +27,7 @@ public class Book implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(isbn);
-        dest.writeInt(price);
+        dest.writeDouble(price);
         dest.writeString(cover);
     }
 

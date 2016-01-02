@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">HP2</string>
     <string name="list_books_error">Error while fetching list of books</string>
-    <string name="price">%1$d EUR</string>
+    <string name="price">%1$.02f EUR</string>
     <string name="reload">Reload</string>
     <string name="check_connection">Please check connection and reload.</string>
-    <string name="buy">Buy (%1$f EUR)</string>
+    <string name="buy">Buy (%1$.02f EUR)</string>
 </resources>

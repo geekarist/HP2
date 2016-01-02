@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ public class BookDetailActivity extends Activity {
         titleText.setText(book.title);
         ImageView coverImageView = (ImageView) findViewById(R.id.book_detail_image_view);
         Glide.with(this).load(book.cover).placeholder(R.drawable.book_cover_placeholder).into(coverImageView);
+        Button buyButton = (Button) findViewById(R.id.book_detail_buy_button);
+        buyButton.setText(getString(R.string.buy, book.price));
     }
 
     public static Intent newIntent(Context context, @NonNull Book book) {
