@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 public class BookDetailActivity extends Activity {
 
@@ -16,9 +20,12 @@ public class BookDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
-        TextView bookTitleText = (TextView) findViewById(R.id.book_detail_title_text);
         Book book = getIntent().getParcelableExtra(EXTRA_BOOK);
-        bookTitleText.setText(book.title);
+
+        TextView titleText = (TextView) findViewById(R.id.book_detail_title_text);
+        titleText.setText(book.title);
+        ImageView coverImageView = (ImageView) findViewById(R.id.book_detail_image_view);
+        Glide.with(this).load(book.cover).placeholder(R.drawable.book_cover_placeholder).into(coverImageView);
     }
 
     public static Intent newIntent(Context context, @NonNull Book book) {
