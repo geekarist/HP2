@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_weight="7"
+        android:layout_weight="5"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         android:layout_height="0dp"
         android:layout_below="@+id/book_detail_title_text"
         android:layout_centerHorizontal="true"
-        android:layout_weight="83"
+        android:layout_weight="85"
         tools:border="true" />
 
     <Button
