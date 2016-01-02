@@ -21,7 +21,7 @@ public class BookDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
-        Book book = getIntent().getParcelableExtra(EXTRA_BOOK);
+        final Book book = getIntent().getParcelableExtra(EXTRA_BOOK);
 
         TextView titleText = (TextView) findViewById(R.id.book_detail_title_text);
         titleText.setText(book.title);
@@ -29,6 +29,12 @@ public class BookDetailActivity extends Activity {
         Glide.with(this).load(book.cover).placeholder(R.drawable.book_cover_placeholder).into(coverImageView);
         Button buyButton = (Button) findViewById(R.id.book_detail_buy_button);
         buyButton.setText(getString(R.string.buy, book.price));
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(DisplayCartActivity.newAddToCartIntent(BookDetailActivity.this, book));
+            }
+        });
     }
 
     public static Intent newIntent(Context context, @NonNull Book book) {
