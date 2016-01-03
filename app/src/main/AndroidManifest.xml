@@ -17,8 +17,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookDetailActivity" />
-        <activity android:name=".DisplayCartActivity"></activity>
+        <activity
+            android:name=".BookDetailActivity"
+            android:parentActivityName=".ListBooksActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListBooksActivity" />
+        </activity>
+        <activity
+            android:name=".DisplayCartActivity"
+            android:parentActivityName=".ListBooksActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ListBooksActivity" />
+        </activity>
     </application>
 
 </manifest>
