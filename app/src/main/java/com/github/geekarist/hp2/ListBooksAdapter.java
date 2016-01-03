@@ -57,6 +57,11 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
         notifyDataSetChanged();
     }
 
+    public void addBook(Book book) {
+        mBooks.add(book);
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleView;
         public TextView mPriceView;
