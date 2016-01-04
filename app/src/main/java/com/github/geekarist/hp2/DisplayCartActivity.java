@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +39,11 @@ public class DisplayCartActivity extends AppCompatActivity {
         if (supportActionBar != null) {
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        TextView totalLabelText = (TextView) findViewById(R.id.cart_total_label_text);
+        totalLabelText.setText(getString(R.string.cart_total_label, adapter.getItemCount()));
+        TextView totalValueText = (TextView) findViewById(R.id.cart_total_value_text);
+        totalValueText.setText(getString(R.string.cart_total_value, adapter.totalPrice()));
     }
 
     public static Intent newAddToCartIntent(BookDetailActivity bookDetailActivity, Book book) {

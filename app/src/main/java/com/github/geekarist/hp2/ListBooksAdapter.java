@@ -62,6 +62,14 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
         notifyDataSetChanged();
     }
 
+    public double totalPrice() {
+        double total = 0;
+        for (Book b : mBooks) {
+            total += b.price;
+        }
+        return total;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleView;
         public TextView mPriceView;
