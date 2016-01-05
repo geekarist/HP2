@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="6sp"
-            tools:text="Total (2 articles):" />
+            tools:text="Total (2 items):" />
 
         <TextView
             android:id="@+id/cart_total_value_text"
