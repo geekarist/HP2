@@ -70,6 +70,14 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
         return total;
     }
 
+    public List<Book> getBooks() {
+        return mBooks;
+    }
+
+    public void addBooks(List<Book> books) {
+        mBooks.addAll(books);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleView;
         public TextView mPriceView;
