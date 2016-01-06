@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,24 +54,40 @@ public class ListBooksActivity extends AppCompatActivity {
     }
 
     private void fetchBooks() {
-        mBookService.listBooks().enqueue(new Callback<List<Book>>() {
-            @Override
-            public void onResponse(Response<List<Book>> response, Retrofit retrofit) {
-                mBookListAdapter.setBooks(response.body());
-                mFixConnectivityView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                mBookListAdapter.setBooks(new ArrayList<Book>());
-                Log.e(TAG, getString(R.string.list_books_error), t);
-                mFixConnectivityView.setVisibility(View.VISIBLE);
-            }
-        });
+        mBookService.listBooks().enqueue(new FetchBookCallback(this));
     }
 
     public interface BookService {
         @GET("/books")
         Call<List<Book>> listBooks();
+    }
+
+    private static class FetchBookCallback implements Callback<List<Book>> {
+        private final WeakReference<ListBooksActivity> mActivityWeakReference;
+
+        public FetchBookCallback(ListBooksActivity activity) {
+            mActivityWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void onResponse(Response<List<Book>> response, Retrofit retrofit) {
+            if (getActivity() != null && !getActivity().isFinishing()) {
+                getActivity().mBookListAdapter.setBooks(response.body());
+                getActivity().mFixConnectivityView.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public void onFailure(Throwable t) {
+            Log.e(TAG, getActivity().getString(R.string.list_books_error), t);
+            if (getActivity() != null && !getActivity().isFinishing()) {
+                getActivity().mBookListAdapter.setBooks(new ArrayList<Book>());
+                getActivity().mFixConnectivityView.setVisibility(View.VISIBLE);
+            }
+        }
+
+        private ListBooksActivity getActivity() {
+            return mActivityWeakReference.get();
+        }
     }
 }
