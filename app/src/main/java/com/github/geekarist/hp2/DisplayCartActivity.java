@@ -1,6 +1,7 @@
 package com.github.geekarist.hp2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -13,9 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class DisplayCartActivity extends AppCompatActivity {
 
@@ -37,13 +43,9 @@ public class DisplayCartActivity extends AppCompatActivity {
         Book book = getIntent().getParcelableExtra(EXTRA_BOOK);
         mAdapter.addBook(book);
 
-        // TODO: restore cart from shared prefs
-        if (savedInstanceState != null) {
-            Book[] books = (Book[]) savedInstanceState.getParcelableArray(BOOKS_BUNDLE_KEY);
-            if (books != null) {
-                mAdapter.addBooks(Arrays.asList(books));
-            }
-        }
+        List<Book> books = deserialize(
+                getSharedPreferences(BOOKS_BUNDLE_KEY, MODE_PRIVATE).getString(BOOKS_BUNDLE_KEY, "[]"));
+        mAdapter.addBooks(books);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.book_cart_toolbar);
         setSupportActionBar(toolbar);
@@ -59,11 +61,22 @@ public class DisplayCartActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        // TODO: save cart into shared prefs in onStop
-        super.onSaveInstanceState(outState);
-        List<Book> books = mAdapter.getBooks();
-        outState.putParcelableArray(BOOKS_BUNDLE_KEY, books.toArray(new Book[books.size()]));
+    protected void onStop() {
+        super.onStop();
+        getSharedPreferences(BOOKS_BUNDLE_KEY, MODE_PRIVATE)
+                .edit()
+                .putString(BOOKS_BUNDLE_KEY, serialize(mAdapter.getBooks()))
+                .commit();
+    }
+
+    private List<Book> deserialize(String booksAsJson) {
+        Type typeOfBookList = new TypeToken<List<Book>>() {
+        }.getType();
+        return new Gson().fromJson(booksAsJson, typeOfBookList);
+    }
+
+    private String serialize(List<Book> books) {
+        return new Gson().toJson(books);
     }
 
     public static Intent newAddToCartIntent(BookDetailActivity bookDetailActivity, Book book) {
