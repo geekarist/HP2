@@ -37,6 +37,7 @@ public class DisplayCartActivity extends AppCompatActivity {
         Book book = getIntent().getParcelableExtra(EXTRA_BOOK);
         mAdapter.addBook(book);
 
+        // TODO: restore cart from shared prefs
         if (savedInstanceState != null) {
             Book[] books = (Book[]) savedInstanceState.getParcelableArray(BOOKS_BUNDLE_KEY);
             if (books != null) {
@@ -59,6 +60,7 @@ public class DisplayCartActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        // TODO: save cart into shared prefs in onStop
         super.onSaveInstanceState(outState);
         List<Book> books = mAdapter.getBooks();
         outState.putParcelableArray(BOOKS_BUNDLE_KEY, books.toArray(new Book[books.size()]));
