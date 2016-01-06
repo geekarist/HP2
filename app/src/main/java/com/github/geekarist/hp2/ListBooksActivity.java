@@ -25,6 +25,7 @@ public class ListBooksActivity extends AppCompatActivity {
     private View mFixConnectivityView;
     private View mReloadButton;
     private RecyclerView mBookListView;
+    private BookService mBookService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,12 @@ public class ListBooksActivity extends AppCompatActivity {
         mBookListView.setAdapter(mBookListAdapter);
         mFixConnectivityView = findViewById(R.id.fix_connectivity_group);
         mReloadButton = findViewById(R.id.reload_button);
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://henri-potier.xebia.fr")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mBookService = retrofit.create(BookService.class);
+
         mReloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,11 +53,7 @@ public class ListBooksActivity extends AppCompatActivity {
     }
 
     private void fetchBooks() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://henri-potier.xebia.fr")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        BookService bookService = retrofit.create(BookService.class);
-        bookService.listBooks().enqueue(new Callback<List<Book>>() {
+        mBookService.listBooks().enqueue(new Callback<List<Book>>() {
             @Override
             public void onResponse(Response<List<Book>> response, Retrofit retrofit) {
                 mBookListAdapter.setBooks(response.body());
