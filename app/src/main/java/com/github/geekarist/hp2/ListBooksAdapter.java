@@ -32,19 +32,13 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
 
     @Override
     public void onBindViewHolder(ListBooksAdapter.ViewHolder holder, final int position) {
-        final Book book = mBooks.get(position);
-        holder.mTitleView.setText(book.title);
-        holder.mPriceView.setText(mContext.getString(R.string.price, book.price));
+        holder.mBook = mBooks.get(position);
+        holder.mTitleView.setText(holder.mBook.title);
+        holder.mPriceView.setText(mContext.getString(R.string.price, holder.mBook.price));
         Glide.with(mContext)
-                .load(book.cover)
+                .load(holder.mBook.cover)
                 .placeholder(R.drawable.book_cover_placeholder)
                 .into(holder.mImageView);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.startActivity(BookDetailActivity.newIntent(mContext, book));
-            }
-        });
     }
 
     @Override
@@ -78,16 +72,23 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
         mBooks.addAll(books);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitleView;
         public TextView mPriceView;
         public ImageView mImageView;
+        public Book mBook;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.mTitleView = (TextView) itemView.findViewById(R.id.book_title_view);
-            this.mPriceView = (TextView) itemView.findViewById(R.id.book_price_view);
-            this.mImageView = (ImageView) itemView.findViewById(R.id.book_image_view);
+            mTitleView = (TextView) itemView.findViewById(R.id.book_title_view);
+            mPriceView = (TextView) itemView.findViewById(R.id.book_price_view);
+            mImageView = (ImageView) itemView.findViewById(R.id.book_image_view);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.getContext().startActivity(BookDetailActivity.newIntent(v.getContext(), mBook));
+                }
+            });
         }
     }
 }
