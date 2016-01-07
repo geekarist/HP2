@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="6sp"
+            android:textSize="@dimen/medium_text"
             tools:text="Total (2 items):" />
 
         <TextView
@@ -36,12 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/cart_total_label_text"
+            android:textSize="@dimen/medium_text"
             tools:text="42.00 EUR" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:textSize="@dimen/medium_text"
             android:text="@string/checkout" />
     </RelativeLayout>
 
