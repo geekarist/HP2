@@ -34,7 +34,7 @@ public class ListBooksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_books);
         mBookListView = (RecyclerView) findViewById(R.id.book_list_view);
         mBookListView.setLayoutManager(new LinearLayoutManager(this));
-        mBookListAdapter = new ListBooksAdapter(this);
+        mBookListAdapter = new ListBooksAdapter();
         mBookListView.setAdapter(mBookListAdapter);
         mFixConnectivityView = findViewById(R.id.fix_connectivity_group);
         mReloadButton = findViewById(R.id.reload_button);

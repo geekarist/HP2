@@ -15,10 +15,8 @@ import java.util.List;
 
 public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> {
     private List<Book> mBooks;
-    private Context mContext;
 
-    public ListBooksAdapter(Context mContext) {
-        this.mContext = mContext;
+    public ListBooksAdapter() {
         mBooks = new ArrayList<>();
     }
 
@@ -34,8 +32,8 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
     public void onBindViewHolder(ListBooksAdapter.ViewHolder holder, final int position) {
         holder.mBook = mBooks.get(position);
         holder.mTitleView.setText(holder.mBook.title);
-        holder.mPriceView.setText(mContext.getString(R.string.price, holder.mBook.price));
-        Glide.with(mContext)
+        holder.mPriceView.setText(holder.itemView.getContext().getString(R.string.price, holder.mBook.price));
+        Glide.with(holder.itemView.getContext())
                 .load(holder.mBook.cover)
                 .placeholder(R.drawable.book_cover_placeholder)
                 .into(holder.mImageView);

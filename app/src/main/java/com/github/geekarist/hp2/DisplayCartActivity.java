@@ -1,27 +1,19 @@
 package com.github.geekarist.hp2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Parcelable;
-import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class DisplayCartActivity extends AppCompatActivity {
 
@@ -38,7 +30,7 @@ public class DisplayCartActivity extends AppCompatActivity {
 
         mCartListView = (RecyclerView) findViewById(R.id.book_cart_view);
         mCartListView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ListBooksAdapter(this);
+        mAdapter = new ListBooksAdapter();
         mCartListView.setAdapter(mAdapter);
         Book book = getIntent().getParcelableExtra(EXTRA_BOOK);
         mAdapter.addBook(book);
