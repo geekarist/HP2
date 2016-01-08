@@ -18,15 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/cart_total_label_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginEnd="6sp"
             android:textSize="@dimen/medium_text"
             tools:text="Total (2 items):" />
@@ -35,8 +34,7 @@
             android:id="@+id/cart_total_value_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/cart_total_label_text"
+            android:layout_below="@+id/cart_total_label_text"
             android:textSize="@dimen/medium_text"
             tools:text="42.00 EUR" />
 
@@ -44,8 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textSize="@dimen/medium_text"
-            android:text="@string/checkout" />
+            android:text="@string/checkout"
+            android:textSize="@dimen/medium_text" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
