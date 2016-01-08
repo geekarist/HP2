@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.github.geekarist.hp2.bestoffer.BestOffer;
+import com.github.geekarist.hp2.bestoffer.FakeDiscountCatalog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,6 +25,8 @@ public class DisplayCartActivity extends AppCompatActivity {
 
     private RecyclerView mCartListView;
     private ListBooksAdapter mAdapter;
+
+    private BestOffer<Book> mBookBestOffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +58,12 @@ public class DisplayCartActivity extends AppCompatActivity {
         totalValueText.setText(getString(R.string.cart_total_value, mAdapter.totalPrice()));
         totalValueText.setPaintFlags(totalValueText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
+        mBookBestOffer = new BestOffer<>(mAdapter, new FakeDiscountCatalog<Book>());
+
         TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
-        double discount = mAdapter.totalPrice() / 10;
+        double discount = mBookBestOffer.calculate();
         totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - discount));
+
     }
 
     @Override

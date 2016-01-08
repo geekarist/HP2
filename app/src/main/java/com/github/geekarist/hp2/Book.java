@@ -3,7 +3,9 @@ package com.github.geekarist.hp2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Book implements Parcelable {
+import com.github.geekarist.hp2.bestoffer.Item;
+
+public class Book implements Parcelable, Item {
     final String title;
     final String isbn;
     final double price;
@@ -47,4 +49,9 @@ public class Book implements Parcelable {
             return new Book[size];
         }
     };
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
 }

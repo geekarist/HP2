@@ -9,11 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.geekarist.hp2.bestoffer.Cart;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> {
+public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> implements Cart<Book> {
     private List<Book> mBooks;
 
     public ListBooksAdapter() {
@@ -60,6 +61,11 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
             total += b.price;
         }
         return total;
+    }
+
+    @Override
+    public List<Book> getItems() {
+        return mBooks;
     }
 
     public List<Book> getBooks() {
