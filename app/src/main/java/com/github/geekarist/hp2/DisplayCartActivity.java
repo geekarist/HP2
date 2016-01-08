@@ -1,6 +1,7 @@
 package com.github.geekarist.hp2;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,8 +49,14 @@ public class DisplayCartActivity extends AppCompatActivity {
 
         TextView totalLabelText = (TextView) findViewById(R.id.cart_total_label_text);
         totalLabelText.setText(getString(R.string.cart_total_label, mAdapter.getItemCount()));
+
         TextView totalValueText = (TextView) findViewById(R.id.cart_total_value_text);
         totalValueText.setText(getString(R.string.cart_total_value, mAdapter.totalPrice()));
+        totalValueText.setPaintFlags(totalValueText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+        TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
+        double discount = mAdapter.totalPrice() / 10;
+        totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - discount));
     }
 
     @Override

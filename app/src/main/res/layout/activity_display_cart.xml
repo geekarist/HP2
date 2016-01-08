@@ -38,6 +38,16 @@
             android:textSize="@dimen/medium_text"
             tools:text="42.00 EUR" />
 
+        <TextView
+            android:id="@+id/cart_total_discount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cart_total_label_text"
+            android:layout_toEndOf="@+id/cart_total_value_text"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/medium_text"
+            tools:text="48.00 EUR" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
