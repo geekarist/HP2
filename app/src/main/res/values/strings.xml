@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">HP2</string>
+    <string name="list_books_error">Error while fetching list of books</string>
+    <string name="price">%1$.02f EUR</string>
+    <string name="reload">Reload</string>
+    <string name="check_connection">Please check connection and reload.</string>
+    <string name="buy">Buy (%1$.02f EUR)</string>
+    <string name="cart_total_label">Total (%1$d items):</string>
+    <string name="cart_total_value">%1$.02f</string>
+    <string name="cart_total_discount">%1$.02f EUR</string>
+    <string name="checkout">Checkout</string>
+</resources>
