@@ -2,16 +2,16 @@ package com.github.geekarist.hp2;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.github.geekarist.hp2.bestoffer.BestOffer;
-import com.github.geekarist.hp2.bestoffer.FakeDiscountCatalog;
+import com.github.geekarist.hp2.bestoffer.DiscountCatalog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -27,6 +27,12 @@ public class DisplayCartActivity extends AppCompatActivity {
     private ListBooksAdapter mAdapter;
 
     private BestOffer<Book> mBookBestOffer;
+
+    public static Intent newAddToCartIntent(BookDetailActivity bookDetailActivity, Book book) {
+        Intent intent = new Intent(bookDetailActivity, DisplayCartActivity.class);
+        intent.putExtra(EXTRA_BOOK, book);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +64,8 @@ public class DisplayCartActivity extends AppCompatActivity {
         totalValueText.setText(getString(R.string.cart_total_value, mAdapter.totalPrice()));
         totalValueText.setPaintFlags(totalValueText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        mBookBestOffer = new BestOffer<>(mAdapter, new FakeDiscountCatalog<Book>());
+        DiscountCatalog<Book> henriPotierDiscountCatalog = new HenriPotierDiscountCatalog();
+        mBookBestOffer = new BestOffer<>(mAdapter, henriPotierDiscountCatalog);
 
         TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
         double discount = mBookBestOffer.calculate();
@@ -83,11 +90,5 @@ public class DisplayCartActivity extends AppCompatActivity {
 
     private String serialize(List<Book> books) {
         return new Gson().toJson(books);
-    }
-
-    public static Intent newAddToCartIntent(BookDetailActivity bookDetailActivity, Book book) {
-        Intent intent = new Intent(bookDetailActivity, DisplayCartActivity.class);
-        intent.putExtra(EXTRA_BOOK, book);
-        return intent;
     }
 }
