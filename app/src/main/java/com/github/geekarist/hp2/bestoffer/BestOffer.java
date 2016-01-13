@@ -1,5 +1,8 @@
 package com.github.geekarist.hp2.bestoffer;
 
+import com.github.geekarist.hp2.bestoffer.discount.Discount;
+import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
+
 import java.util.List;
 
 public class BestOffer<T extends Item> {

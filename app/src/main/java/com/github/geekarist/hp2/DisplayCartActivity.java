@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.github.geekarist.hp2.bestoffer.BestOffer;
-import com.github.geekarist.hp2.bestoffer.DiscountCatalog;
+import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

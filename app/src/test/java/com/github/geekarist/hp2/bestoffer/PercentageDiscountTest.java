@@ -2,6 +2,9 @@ package com.github.geekarist.hp2.bestoffer;
 
 import android.support.annotation.NonNull;
 
+import com.github.geekarist.hp2.bestoffer.discount.Discount;
+import com.github.geekarist.hp2.bestoffer.discount.PercentageDiscount;
+
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +16,7 @@ public class PercentageDiscountTest {
 
     @Test
     public void shouldCalculate() throws Exception {
-        Discount<Item> percentageDiscount = new PercentageDiscount(5);
+        Discount<Item> percentageDiscount = new PercentageDiscount<>(5);
         List<Item> items = Arrays.asList(item(100), item(150));
 
         double discount = percentageDiscount.calculate(items);
