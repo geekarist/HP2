@@ -1,9 +1,8 @@
-package com.github.geekarist.hp2.bestoffer;
+package com.github.geekarist.hp2.bestoffer.discount;
 
 import android.support.annotation.NonNull;
 
-import com.github.geekarist.hp2.bestoffer.discount.Discount;
-import com.github.geekarist.hp2.bestoffer.discount.PercentageDiscount;
+import com.github.geekarist.hp2.bestoffer.Item;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
