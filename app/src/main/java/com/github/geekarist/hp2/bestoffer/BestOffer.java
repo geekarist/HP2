@@ -15,7 +15,7 @@ public class BestOffer<T extends Item> {
     }
 
     public double calculate() {
-        List<Discount<T>> discountList = discountCatalog.list();
+        List<Discount<T>> discountList = discountCatalog.list(cart.getItems());
         double maxAmount = 0;
         for (Discount<T> discount : discountList) {
             List<T> items = cart.getItems();
