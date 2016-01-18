@@ -1,10 +1,10 @@
 package com.github.geekarist.hp2.bestoffer.discount;
 
-import com.github.geekarist.hp2.bestoffer.Item;
+import com.github.geekarist.hp2.Book;
 
 import java.util.List;
 
-public class SliceDiscount<T extends Item> implements Discount<T> {
+public class SliceDiscount implements Discount {
     private final int mValue;
     private final int mSliceValue;
 
@@ -14,9 +14,9 @@ public class SliceDiscount<T extends Item> implements Discount<T> {
     }
 
     @Override
-    public double calculate(List<T> items) {
+    public double calculate(List<Book> items) {
         double sum = 0;
-        for (T item : items) {
+        for (Book item : items) {
             sum += item.getPrice();
         }
         return (int) (sum / mSliceValue) * mValue;

@@ -2,7 +2,7 @@ package com.github.geekarist.hp2.bestoffer.discount;
 
 import android.support.annotation.NonNull;
 
-import com.github.geekarist.hp2.bestoffer.Item;
+import com.github.geekarist.hp2.Book;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
@@ -15,8 +15,8 @@ public class PercentageDiscountTest {
 
     @Test
     public void shouldCalculate() throws Exception {
-        Discount<Item> percentageDiscount = new PercentageDiscount<>(5);
-        List<Item> items = Arrays.asList(item(100), item(150));
+        Discount percentageDiscount = new PercentageDiscount(5);
+        List<Book> items = Arrays.asList(newBook(100), newBook(150));
 
         double discount = percentageDiscount.calculate(items);
 
@@ -24,12 +24,7 @@ public class PercentageDiscountTest {
     }
 
     @NonNull
-    private Item item(final double price) {
-        return new Item() {
-            @Override
-            public double getPrice() {
-                return price;
-            }
-        };
+    private Book newBook(int price) {
+        return new Book(null, null, price, null);
     }
 }

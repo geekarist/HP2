@@ -1,10 +1,10 @@
 package com.github.geekarist.hp2.bestoffer.discount;
 
-import com.github.geekarist.hp2.bestoffer.Item;
+import com.github.geekarist.hp2.Book;
 
 import java.util.List;
 
-public interface DiscountCatalog<T extends Item> {
+public interface DiscountCatalog {
 
-    void list(List<T> items, DiscountCatalogCallback<T> callback);
+    void list(List<Book> items, DiscountCatalogCallback callback);
 }

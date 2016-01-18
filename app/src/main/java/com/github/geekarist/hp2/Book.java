@@ -3,9 +3,18 @@ package com.github.geekarist.hp2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.github.geekarist.hp2.bestoffer.Item;
+public class Book implements Parcelable {
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
 
-public class Book implements Parcelable, Item {
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
     final String title;
     final String isbn;
     final double price;
@@ -38,19 +47,6 @@ public class Book implements Parcelable, Item {
         return 0;
     }
 
-    public static final Creator<Book> CREATOR = new Creator<Book>() {
-        @Override
-        public Book createFromParcel(Parcel in) {
-            return new Book(in);
-        }
-
-        @Override
-        public Book[] newArray(int size) {
-            return new Book[size];
-        }
-    };
-
-    @Override
     public double getPrice() {
         return price;
     }

@@ -18,7 +18,7 @@ import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
-public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
+public class HenriPotierDiscountCatalog implements DiscountCatalog {
 
     private static final String TAG = HenriPotierDiscountCatalog.class.getSimpleName();
 
@@ -32,7 +32,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
     }
 
     @Override
-    public void list(List<Book> items, final DiscountCatalogCallback<Book> callback) {
+    public void list(List<Book> items, final DiscountCatalogCallback callback) {
         String joinedIsbnList = "";
         for (Book book : items) {
             if (!"".equals(joinedIsbnList)) {
@@ -44,7 +44,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
         mBookService.listCommercialOffers(joinedIsbnList).enqueue(new retrofit.Callback<BookDiscountCatalog>() {
             @Override
             public void onResponse(Response<BookDiscountCatalog> response, Retrofit retrofit) {
-                List<Discount<Book>> offers = response.body().offers;
+                List<Discount> offers = response.body().offers;
                 callback.onListResult(offers);
             }
 
@@ -60,7 +60,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
         Call<BookDiscountCatalog> listCommercialOffers(@Path("isbnList") String isbnList);
     }
 
-    private static class BookDiscount implements Discount<Book> {
+    private static class BookDiscount implements Discount {
         String type;
         int value;
         int sliceValue;
@@ -76,13 +76,13 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
 
         @Override
         public double calculate(List<Book> items) {
-            Discount<Book> discount;
+            Discount discount;
             if ("minus".equals(type)) {
-                discount = new MinusDiscount<>(value);
+                discount = new MinusDiscount(value);
             } else if ("percentage".equals(type)) {
-                discount = new PercentageDiscount<>(value);
+                discount = new PercentageDiscount(value);
             } else if ("slice".equals(type)) {
-                discount = new SliceDiscount<>(value, sliceValue);
+                discount = new SliceDiscount(value, sliceValue);
             } else {
                 Log.w(TAG, String.format("Unknown offer [%s]", type));
                 return 0;
@@ -92,7 +92,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
     }
 
     private static class BookDiscountCatalog {
-        List<Discount<Book>> offers;
+        List<Discount> offers;
 
         @Override
         public String toString() {

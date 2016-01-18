@@ -1,10 +1,10 @@
 package com.github.geekarist.hp2.bestoffer.discount;
 
-import com.github.geekarist.hp2.bestoffer.Item;
+import com.github.geekarist.hp2.Book;
 
 import java.util.List;
 
-public class MinusDiscount<T extends Item> implements Discount<T> {
+public class MinusDiscount implements Discount {
     private final int mAmount;
 
     public MinusDiscount(int amount) {
@@ -12,7 +12,7 @@ public class MinusDiscount<T extends Item> implements Discount<T> {
     }
 
     @Override
-    public double calculate(List<T> items) {
+    public double calculate(List<Book> items) {
         return mAmount;
     }
 }

@@ -26,7 +26,7 @@ public class DisplayCartActivity extends AppCompatActivity {
     private RecyclerView mCartListView;
     private ListBooksAdapter mAdapter;
 
-    private BestOffer<Book> mBookBestOffer;
+    private BestOffer mBookBestOffer;
 
     public static Intent newAddToCartIntent(BookDetailActivity bookDetailActivity, Book book) {
         Intent intent = new Intent(bookDetailActivity, DisplayCartActivity.class);
@@ -64,8 +64,8 @@ public class DisplayCartActivity extends AppCompatActivity {
         totalValueText.setText(getString(R.string.cart_total_value, mAdapter.totalPrice()));
         totalValueText.setPaintFlags(totalValueText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        DiscountCatalog<Book> henriPotierDiscountCatalog = new HenriPotierDiscountCatalog();
-        mBookBestOffer = new BestOffer<>(mAdapter, henriPotierDiscountCatalog);
+        DiscountCatalog henriPotierDiscountCatalog = new HenriPotierDiscountCatalog();
+        mBookBestOffer = new BestOffer(mAdapter, henriPotierDiscountCatalog);
 
         final TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
         mBookBestOffer.calculate(new BestOffer.Callback() {

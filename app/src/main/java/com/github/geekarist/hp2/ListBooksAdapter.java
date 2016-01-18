@@ -1,6 +1,5 @@
 package com.github.geekarist.hp2;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import com.github.geekarist.hp2.bestoffer.Cart;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> implements Cart<Book> {
+public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> implements Cart {
     private List<Book> mBooks;
 
     public ListBooksAdapter() {
@@ -45,11 +44,6 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
         return mBooks.size();
     }
 
-    public void setBooks(List<Book> books) {
-        mBooks = books;
-        notifyDataSetChanged();
-    }
-
     public void addBook(Book book) {
         mBooks.add(book);
         notifyDataSetChanged();
@@ -70,6 +64,11 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
 
     public List<Book> getBooks() {
         return mBooks;
+    }
+
+    public void setBooks(List<Book> books) {
+        mBooks = books;
+        notifyDataSetChanged();
     }
 
     public void addBooks(List<Book> books) {

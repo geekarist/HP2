@@ -14,7 +14,7 @@ import java.util.List;
 public class SliceDiscountTest {
     @Test
     public void shouldCalculate() throws Exception {
-        Discount<Book> discount = new SliceDiscount<>(12, 100);
+        Discount discount = new SliceDiscount(12, 100);
         List<Book> itemList = Arrays.asList(newBook(29), newBook(42), newBook(53), newBook(72), newBook(122));
 
         double amount = discount.calculate(itemList);
