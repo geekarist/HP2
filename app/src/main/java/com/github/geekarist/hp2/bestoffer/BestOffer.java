@@ -15,6 +15,7 @@ public class BestOffer<T extends Item> {
     }
 
     public double calculate() {
+        // FIXME: use callback
         List<Discount<T>> discountList = discountCatalog.list(cart.getItems());
         double maxAmount = 0;
         for (Discount<T> discount : discountList) {
