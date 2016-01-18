@@ -9,7 +9,6 @@ import com.github.geekarist.hp2.bestoffer.discount.MinusDiscount;
 import com.github.geekarist.hp2.bestoffer.discount.PercentageDiscount;
 import com.github.geekarist.hp2.bestoffer.discount.SliceDiscount;
 
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit.Call;
@@ -34,10 +33,6 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
 
     @Override
     public void list(List<Book> items, final DiscountCatalogCallback<Book> callback) {
-        final Discount<Book> percentageDiscount = new PercentageDiscount<>(5);
-        final Discount<Book> minusDiscount = new MinusDiscount<>(15);
-        final Discount<Book> sliceDiscount = new SliceDiscount<>(12, 100);
-
         String joinedIsbnList = "";
         for (Book book : items) {
             if (!"".equals(joinedIsbnList)) {
@@ -49,7 +44,8 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
         mBookService.listCommercialOffers(joinedIsbnList).enqueue(new retrofit.Callback<BookDiscountCatalog>() {
             @Override
             public void onResponse(Response<BookDiscountCatalog> response, Retrofit retrofit) {
-                callback.onListResult(Arrays.asList(percentageDiscount, minusDiscount, sliceDiscount));
+                List<Discount<Book>> offers = response.body().offers;
+                callback.onListResult(offers);
             }
 
             @Override
@@ -82,7 +78,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
         public double calculate(List<Book> items) {
             Discount<Book> discount;
             if ("minus".equals(type)) {
-                discount = new MinusDiscount<Book>(value);
+                discount = new MinusDiscount<>(value);
             } else if ("percentage".equals(type)) {
                 discount = new PercentageDiscount<>(value);
             } else if ("slice".equals(type)) {
@@ -96,7 +92,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog<Book> {
     }
 
     private static class BookDiscountCatalog {
-        List<BookDiscount> offers;
+        List<Discount<Book>> offers;
 
         @Override
         public String toString() {

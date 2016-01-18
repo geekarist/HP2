@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DiscountCatalog<T extends Item> {
 
-    List<Discount<T>> list(List<T> items, DiscountCatalogCallback<T> callback);
+    void list(List<T> items, DiscountCatalogCallback<T> callback);
 }

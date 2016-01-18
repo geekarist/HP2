@@ -67,10 +67,13 @@ public class DisplayCartActivity extends AppCompatActivity {
         DiscountCatalog<Book> henriPotierDiscountCatalog = new HenriPotierDiscountCatalog();
         mBookBestOffer = new BestOffer<>(mAdapter, henriPotierDiscountCatalog);
 
-        TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
-        double discount = mBookBestOffer.calculate();
-        totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - discount));
-
+        final TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
+        mBookBestOffer.calculate(new BestOffer.Callback() {
+            @Override
+            public void apply(double bestValue) {
+                totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - bestValue));
+            }
+        });
     }
 
     @Override
