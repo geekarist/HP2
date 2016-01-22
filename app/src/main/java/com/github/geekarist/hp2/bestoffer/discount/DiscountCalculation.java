@@ -4,6 +4,6 @@ import com.github.geekarist.hp2.Book;
 
 import java.util.List;
 
-public interface Discount {
-    double calculate(List<Book> items);
+public interface DiscountCalculation {
+    double apply(List<Book> items);
 }

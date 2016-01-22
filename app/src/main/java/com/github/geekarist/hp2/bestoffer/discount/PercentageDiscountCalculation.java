@@ -4,15 +4,15 @@ import com.github.geekarist.hp2.Book;
 
 import java.util.List;
 
-public class PercentageDiscount implements Discount {
+public class PercentageDiscountCalculation implements DiscountCalculation {
     private final int mRate;
 
-    public PercentageDiscount(int rate) {
+    public PercentageDiscountCalculation(int rate) {
         mRate = rate;
     }
 
     @Override
-    public double calculate(List<Book> items) {
+    public double apply(List<Book> items) {
         double discount = 0;
         for (Book item : items) {
             discount += (item.getPrice() * mRate / 100.);

@@ -4,15 +4,15 @@ import com.github.geekarist.hp2.Book;
 
 import java.util.List;
 
-public class MinusDiscount implements Discount {
+public class MinusDiscountCalculation implements DiscountCalculation {
     private final int mAmount;
 
-    public MinusDiscount(int amount) {
+    public MinusDiscountCalculation(int amount) {
         mAmount = amount;
     }
 
     @Override
-    public double calculate(List<Book> items) {
+    public double apply(List<Book> items) {
         return mAmount;
     }
 }

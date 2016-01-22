@@ -1,13 +1,8 @@
 package com.github.geekarist.hp2;
 
-import android.util.Log;
-
-import com.github.geekarist.hp2.bestoffer.discount.Discount;
+import com.github.geekarist.hp2.bestoffer.discount.BookDiscount;
 import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
 import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
-import com.github.geekarist.hp2.bestoffer.discount.MinusDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.PercentageDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.SliceDiscount;
 
 import java.util.List;
 
@@ -44,7 +39,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog {
         mBookService.listCommercialOffers(joinedIsbnList).enqueue(new retrofit.Callback<BookDiscountCatalog>() {
             @Override
             public void onResponse(Response<BookDiscountCatalog> response, Retrofit retrofit) {
-                List<Discount> offers = response.body().offers;
+                List<BookDiscount> offers = response.body().offers;
                 callback.onListResult(offers);
             }
 
@@ -60,39 +55,8 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog {
         Call<BookDiscountCatalog> listCommercialOffers(@Path("isbnList") String isbnList);
     }
 
-    private static class BookDiscount implements Discount {
-        String type;
-        int value;
-        int sliceValue;
-
-        @Override
-        public String toString() {
-            return "BookDiscount{" +
-                    "type='" + type + '\'' +
-                    ", value='" + value + '\'' +
-                    ", sliceValue='" + sliceValue + '\'' +
-                    '}';
-        }
-
-        @Override
-        public double calculate(List<Book> items) {
-            Discount discount;
-            if ("minus".equals(type)) {
-                discount = new MinusDiscount(value);
-            } else if ("percentage".equals(type)) {
-                discount = new PercentageDiscount(value);
-            } else if ("slice".equals(type)) {
-                discount = new SliceDiscount(value, sliceValue);
-            } else {
-                Log.w(TAG, String.format("Unknown offer [%s]", type));
-                return 0;
-            }
-            return discount.calculate(items);
-        }
-    }
-
     private static class BookDiscountCatalog {
-        List<Discount> offers;
+        List<BookDiscount> offers;
 
         @Override
         public String toString() {
