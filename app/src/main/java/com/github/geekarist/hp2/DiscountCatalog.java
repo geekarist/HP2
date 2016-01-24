@@ -1,16 +1,14 @@
 package com.github.geekarist.hp2;
 
+import android.util.Log;
+
 import com.github.geekarist.hp2.bestoffer.discount.BookDiscount;
 import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
 
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
-import retrofit.http.GET;
-import retrofit.http.Path;
 
 public class DiscountCatalog implements com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog {
 
@@ -18,12 +16,8 @@ public class DiscountCatalog implements com.github.geekarist.hp2.bestoffer.disco
 
     private final BookService mBookService;
 
-    public DiscountCatalog() {
-        // TODO: move to Application
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://henri-potier.xebia.fr")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        mBookService = retrofit.create(BookService.class);
+    public DiscountCatalog(BookService bookService) {
+        mBookService = bookService;
     }
 
     // TODO: unit test
@@ -47,24 +41,9 @@ public class DiscountCatalog implements com.github.geekarist.hp2.bestoffer.disco
             @Override
             public void onFailure(Throwable t) {
                 // TODO: display error
-                t.printStackTrace();
+                Log.e(TAG, "Error while listing commercial offers", t);
             }
         });
     }
 
-    public interface BookService {
-        @GET("/books/{isbnList}/commercialOffers")
-        Call<BookDiscountCatalog> listCommercialOffers(@Path("isbnList") String isbnList);
-    }
-
-    private static class BookDiscountCatalog {
-        List<BookDiscount> offers;
-
-        @Override
-        public String toString() {
-            return "BookDiscountCatalog{" +
-                    "offers=" + offers +
-                    '}';
-        }
-    }
 }
