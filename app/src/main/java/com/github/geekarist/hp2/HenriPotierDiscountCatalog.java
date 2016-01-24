@@ -20,12 +20,14 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog {
     private final BookService mBookService;
 
     public HenriPotierDiscountCatalog() {
+        // TODO: move to Application
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://henri-potier.xebia.fr")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mBookService = retrofit.create(BookService.class);
     }
 
+    // TODO: unit test
     @Override
     public void list(List<Book> items, final DiscountCatalogCallback callback) {
         String joinedIsbnList = "";

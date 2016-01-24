@@ -15,6 +15,7 @@ public class Book implements Parcelable {
             return new Book[size];
         }
     };
+
     final String title;
     final String isbn;
     final double price;

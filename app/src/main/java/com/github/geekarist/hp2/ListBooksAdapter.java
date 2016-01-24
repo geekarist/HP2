@@ -49,6 +49,7 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
         notifyDataSetChanged();
     }
 
+    // TODO: unit test
     public double totalPrice() {
         double total = 0;
         for (Book b : mBooks) {
