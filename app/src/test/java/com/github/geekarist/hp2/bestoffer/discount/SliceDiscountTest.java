@@ -14,10 +14,10 @@ import java.util.List;
 public class SliceDiscountTest {
     @Test
     public void shouldCalculate() throws Exception {
-        Discount discount = new SliceDiscount(12, 100);
+        DiscountCalculation discount = new SliceDiscountCalculation(12, 100);
         List<Book> itemList = Arrays.asList(newBook(29), newBook(42), newBook(53), newBook(72), newBook(122));
 
-        double amount = discount.calculate(itemList);
+        double amount = discount.apply(itemList);
 
         Assert.assertThat(amount, new IsEqual<>(3. * 12));
     }

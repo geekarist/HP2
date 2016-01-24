@@ -15,10 +15,10 @@ public class PercentageDiscountTest {
 
     @Test
     public void shouldCalculate() throws Exception {
-        Discount percentageDiscount = new PercentageDiscount(5);
+        DiscountCalculation percentageDiscount = new PercentageDiscountCalculation(5);
         List<Book> items = Arrays.asList(newBook(100), newBook(150));
 
-        double discount = percentageDiscount.calculate(items);
+        double discount = percentageDiscount.apply(items);
 
         Assert.assertThat(discount, new IsEqual<>(12.5));
     }
