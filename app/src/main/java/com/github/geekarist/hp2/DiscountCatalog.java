@@ -1,7 +1,6 @@
 package com.github.geekarist.hp2;
 
 import com.github.geekarist.hp2.bestoffer.discount.BookDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
 import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
 
 import java.util.List;
@@ -13,13 +12,13 @@ import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
-public class HenriPotierDiscountCatalog implements DiscountCatalog {
+public class DiscountCatalog implements com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog {
 
-    private static final String TAG = HenriPotierDiscountCatalog.class.getSimpleName();
+    private static final String TAG = DiscountCatalog.class.getSimpleName();
 
     private final BookService mBookService;
 
-    public HenriPotierDiscountCatalog() {
+    public DiscountCatalog() {
         // TODO: move to Application
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://henri-potier.xebia.fr")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -47,6 +46,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog {
 
             @Override
             public void onFailure(Throwable t) {
+                // TODO: display error
                 t.printStackTrace();
             }
         });

@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.github.geekarist.hp2.bestoffer.BestOffer;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -64,8 +63,8 @@ public class DisplayCartActivity extends AppCompatActivity {
         totalValueText.setText(getString(R.string.cart_total_value, mAdapter.totalPrice()));
         totalValueText.setPaintFlags(totalValueText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        DiscountCatalog henriPotierDiscountCatalog = new HenriPotierDiscountCatalog();
-        mBookBestOffer = new BestOffer(mAdapter, henriPotierDiscountCatalog);
+        com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog discountCatalog = new DiscountCatalog();
+        mBookBestOffer = new BestOffer(mAdapter, discountCatalog);
 
         final TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
         mBookBestOffer.calculate(new BestOffer.Callback() {
