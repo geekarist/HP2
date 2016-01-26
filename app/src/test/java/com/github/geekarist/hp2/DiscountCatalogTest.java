@@ -14,6 +14,7 @@ public class DiscountCatalogTest {
 
     @Test
     public void testList() throws Exception {
+        // TODO: wrap BookService with mockable class
         BookService bookServiceMock = Mockito.mock(BookService.class);
         DiscountCatalog discountCatalog = new DiscountCatalog(bookServiceMock);
 

@@ -20,6 +20,7 @@ public class HenriPotierApplication extends Application {
     }
 
     public BookService getBookService() {
+        // TODO: move to onCreate
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://henri-potier.xebia.fr")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
