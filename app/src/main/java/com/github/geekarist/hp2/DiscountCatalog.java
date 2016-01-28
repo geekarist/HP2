@@ -7,17 +7,18 @@ import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
 
 import java.util.List;
 
-import retrofit.Response;
-import retrofit.Retrofit;
-
 public class DiscountCatalog implements com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog {
 
     private static final String TAG = DiscountCatalog.class.getSimpleName();
 
-    private final BookService mBookService;
+    private final BookApi mRetrofitBookApi;
+
+    public DiscountCatalog(BookApi mRetrofitBookApi) {
+        this.mRetrofitBookApi = mRetrofitBookApi;
+    }
 
     public DiscountCatalog(BookService bookService) {
-        mBookService = bookService;
+        this(new RetrofitBookApi(bookService));
     }
 
     // TODO: unit test
@@ -31,10 +32,10 @@ public class DiscountCatalog implements com.github.geekarist.hp2.bestoffer.disco
             joinedIsbnList += book.isbn;
         }
 
-        mBookService.listCommercialOffers(joinedIsbnList).enqueue(new retrofit.Callback<BookDiscountCatalog>() {
+        mRetrofitBookApi.listCommercialOffers(joinedIsbnList, new BookApi.BookApiCallback() {
             @Override
-            public void onResponse(Response<BookDiscountCatalog> response, Retrofit retrofit) {
-                List<BookDiscount> offers = response.body().offers;
+            public void onResponse(BookDiscountCatalog response) {
+                List<BookDiscount> offers = response.offers;
                 callback.onListResult(offers);
             }
 
