@@ -13,6 +13,12 @@ public class BookDiscount implements DiscountCalculation {
     int value;
     int sliceValue;
 
+    public BookDiscount(String type, int value, int sliceValue) {
+        this.type = type;
+        this.value = value;
+        this.sliceValue = sliceValue;
+    }
+
     @Override
     public String toString() {
         return "BookDiscount{" +
@@ -20,6 +26,28 @@ public class BookDiscount implements DiscountCalculation {
                 ", value='" + value + '\'' +
                 ", sliceValue='" + sliceValue + '\'' +
                 '}';
+    }
+
+    @SuppressWarnings("SimplifiableIfStatement")
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BookDiscount that = (BookDiscount) o;
+
+        if (value != that.value) return false;
+        if (sliceValue != that.sliceValue) return false;
+        return !(type != null ? !type.equals(that.type) : that.type != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + value;
+        result = 31 * result + sliceValue;
+        return result;
     }
 
     @Override

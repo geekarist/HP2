@@ -3,38 +3,42 @@ package com.github.geekarist.hp2;
 import android.support.annotation.NonNull;
 
 import com.github.geekarist.hp2.bestoffer.discount.BookDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DiscountCatalogTest {
 
     @Test
     public void testList() throws Exception {
-        BookApi fakeBookApi = newFakeBookApi(new BookDiscountCatalog());
+        // Given
+        BookApi fakeBookApi = newFakeBookApi(newFakeDiscountCatalog());
         DiscountCatalog discountCatalog = new DiscountCatalog(fakeBookApi);
 
-        discountCatalog.list(new ArrayList<Book>(), new DiscountCatalogCallback() {
-            @Override
-            public void onListResult(List<BookDiscount> discounts) {
-                Assert.fail();
-            }
+        // When
+        discountCatalog.list(new ArrayList<>(), discounts -> {
+
+            // Then
+            assertThat(discounts).containsOnlyElementsOf(
+                    asList(new BookDiscount("slice", 5, 100), new BookDiscount("percentage", 5, 0), new BookDiscount("minus", 5, 0)));
         });
     }
 
     @NonNull
+    private BookDiscountCatalog newFakeDiscountCatalog() {
+        BookDiscountCatalog bookDiscountCatalog = new BookDiscountCatalog();
+        bookDiscountCatalog.offers.addAll(
+                asList(new BookDiscount("slice", 5, 100), new BookDiscount("percentage", 5, 0), new BookDiscount("minus", 5, 0)));
+        return bookDiscountCatalog;
+    }
+
+    @NonNull
     private BookApi newFakeBookApi(BookDiscountCatalog catalog) {
-        final BookDiscountCatalog finalCatalog = catalog;
-        return new BookApi() {
-            @Override
-            public void listCommercialOffers(String joinedIsbnList, BookApiCallback callback) {
-                callback.onResponse(finalCatalog);
-            }
-        };
+        return (joinedIsbnList, callback) -> callback.onResponse(catalog);
     }
 
 }
