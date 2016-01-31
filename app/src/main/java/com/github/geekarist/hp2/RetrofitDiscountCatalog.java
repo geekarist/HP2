@@ -7,25 +7,25 @@ import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
 
 import java.util.List;
 
-public class DiscountCatalog implements com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog {
+public class RetrofitDiscountCatalog implements com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog {
 
-    private static final String TAG = DiscountCatalog.class.getSimpleName();
+    private static final String TAG = RetrofitDiscountCatalog.class.getSimpleName();
 
     private final BookApi mRetrofitBookApi;
 
-    public DiscountCatalog(BookApi mRetrofitBookApi) {
+    public RetrofitDiscountCatalog(BookApi mRetrofitBookApi) {
         this.mRetrofitBookApi = mRetrofitBookApi;
     }
 
-    public DiscountCatalog(BookService bookService) {
+    public RetrofitDiscountCatalog(BookService bookService) {
         this(new RetrofitBookApi(bookService));
     }
 
-    // TODO: unit test
     @Override
     public void list(List<Book> items, final DiscountCatalogCallback callback) {
         String joinedIsbnList = "";
         for (Book book : items) {
+            // TODO: unit test
             if (!"".equals(joinedIsbnList)) {
                 joinedIsbnList += ',';
             }
