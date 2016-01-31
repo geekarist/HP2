@@ -1,6 +1,7 @@
 package com.github.geekarist.hp2;
 
 import com.github.geekarist.hp2.bestoffer.discount.BookDiscount;
+import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
 
 import org.junit.Test;
 
@@ -9,12 +10,12 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DiscountCatalogTest {
+public class RetrofitDiscountCatalogTest {
 
     @Test
     public void shouldListDiscounts() throws Exception {
         // Given
-        DiscountCatalog discountCatalog = new DiscountCatalog((joinedIsbnList, callback) ->
+        DiscountCatalog discountCatalog = new RetrofitDiscountCatalog((joinedIsbnList, callback) ->
                 callback.onResponse(new BookDiscountCatalog(asList(
                         new BookDiscount("slice", 5, 100),
                         new BookDiscount("percentage", 5, 0),

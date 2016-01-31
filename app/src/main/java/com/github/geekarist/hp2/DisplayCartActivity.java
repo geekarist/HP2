@@ -63,16 +63,11 @@ public class DisplayCartActivity extends AppCompatActivity {
         totalValueText.setText(getString(R.string.cart_total_value, mAdapter.totalPrice()));
         totalValueText.setPaintFlags(totalValueText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog discountCatalog = new DiscountCatalog(HenriPotierApplication.getInstance().getBookService());
+        com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog discountCatalog = new RetrofitDiscountCatalog(HenriPotierApplication.getInstance().getBookService());
         mBookBestOffer = new BestOffer(mAdapter, discountCatalog);
 
         final TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
-        mBookBestOffer.calculate(new BestOffer.Callback() {
-            @Override
-            public void apply(double bestValue) {
-                totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - bestValue));
-            }
-        });
+        mBookBestOffer.calculate(bestValue -> totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - bestValue)));
     }
 
     @Override
