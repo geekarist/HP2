@@ -1,35 +1,31 @@
 package com.github.geekarist.hp2.bestoffer;
 
 import com.github.geekarist.hp2.Book;
-import com.github.geekarist.hp2.bestoffer.discount.BookDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
+import com.github.geekarist.hp2.bestoffer.discount.Offer;
+import com.github.geekarist.hp2.bestoffer.discount.OfferCatalog;
 
 import java.util.List;
 
 public class BestOffer {
     private final Cart cart;
-    private final DiscountCatalog discountCatalog;
+    private final OfferCatalog mOfferCatalog;
 
-    public BestOffer(Cart cart, DiscountCatalog discountCatalog) {
+    public BestOffer(Cart cart, OfferCatalog offerCatalog) {
         this.cart = cart;
-        this.discountCatalog = discountCatalog;
+        this.mOfferCatalog = offerCatalog;
     }
 
     public void calculate(final BestOffer.Callback callback) {
-        discountCatalog.list(cart.getItems(), new DiscountCatalogCallback() {
-            @Override
-            public void onListResult(List<BookDiscount> discounts) {
-                double maxAmount = 0;
-                for (BookDiscount discount : discounts) {
-                    List<Book> items = cart.getItems();
-                    double amount = discount.apply(items);
-                    if (amount > maxAmount) {
-                        maxAmount = amount;
-                    }
+        mOfferCatalog.list(cart.getItems(), discounts -> {
+            double maxAmount = 0;
+            for (Offer discount : discounts) {
+                List<Book> items = cart.getItems();
+                double amount = discount.apply(items);
+                if (amount > maxAmount) {
+                    maxAmount = amount;
                 }
-                callback.apply(maxAmount);
             }
+            callback.apply(maxAmount);
         });
     }
 

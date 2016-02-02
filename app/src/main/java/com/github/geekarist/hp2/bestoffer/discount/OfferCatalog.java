@@ -4,7 +4,7 @@ import com.github.geekarist.hp2.Book;
 
 import java.util.List;
 
-public interface DiscountCatalog {
+public interface OfferCatalog {
 
-    void list(List<Book> items, DiscountCatalogCallback callback);
+    void list(List<Book> items, OfferCatalogCallback callback);
 }

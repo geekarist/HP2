@@ -3,6 +3,8 @@ package com.github.geekarist.hp2.bestoffer.discount;
 import android.support.annotation.NonNull;
 
 import com.github.geekarist.hp2.Book;
+import com.github.geekarist.hp2.bestoffer.discount.calculation.DiscountCalculation;
+import com.github.geekarist.hp2.bestoffer.discount.calculation.PercentageDiscountCalculation;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;

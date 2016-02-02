@@ -3,17 +3,21 @@ package com.github.geekarist.hp2.bestoffer.discount;
 import android.util.Log;
 
 import com.github.geekarist.hp2.Book;
+import com.github.geekarist.hp2.bestoffer.discount.calculation.DiscountCalculation;
+import com.github.geekarist.hp2.bestoffer.discount.calculation.MinusDiscountCalculation;
+import com.github.geekarist.hp2.bestoffer.discount.calculation.PercentageDiscountCalculation;
+import com.github.geekarist.hp2.bestoffer.discount.calculation.SliceDiscountCalculation;
 
 import java.util.List;
 
-public class BookDiscount implements DiscountCalculation {
-    private static final String TAG = BookDiscount.class.getSimpleName();
+public class Offer {
+    private static final String TAG = Offer.class.getSimpleName();
 
     String type;
     int value;
     int sliceValue;
 
-    public BookDiscount(String type, int value, int sliceValue) {
+    public Offer(String type, int value, int sliceValue) {
         this.type = type;
         this.value = value;
         this.sliceValue = sliceValue;
@@ -21,7 +25,7 @@ public class BookDiscount implements DiscountCalculation {
 
     @Override
     public String toString() {
-        return "BookDiscount{" +
+        return "Offer{" +
                 "type='" + type + '\'' +
                 ", value='" + value + '\'' +
                 ", sliceValue='" + sliceValue + '\'' +
@@ -34,7 +38,7 @@ public class BookDiscount implements DiscountCalculation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BookDiscount that = (BookDiscount) o;
+        Offer that = (Offer) o;
 
         if (value != that.value) return false;
         if (sliceValue != that.sliceValue) return false;
@@ -50,7 +54,6 @@ public class BookDiscount implements DiscountCalculation {
         return result;
     }
 
-    @Override
     public double apply(List<Book> items) {
         DiscountCalculation discount;
         if ("minus".equals(type)) {

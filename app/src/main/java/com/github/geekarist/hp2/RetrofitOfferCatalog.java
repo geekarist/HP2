@@ -2,27 +2,28 @@ package com.github.geekarist.hp2;
 
 import android.util.Log;
 
-import com.github.geekarist.hp2.bestoffer.discount.BookDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
+import com.github.geekarist.hp2.bestoffer.discount.Offer;
+import com.github.geekarist.hp2.bestoffer.discount.OfferCatalog;
+import com.github.geekarist.hp2.bestoffer.discount.OfferCatalogCallback;
 
 import java.util.List;
 
-public class RetrofitDiscountCatalog implements com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog {
+public class RetrofitOfferCatalog implements OfferCatalog {
 
-    private static final String TAG = RetrofitDiscountCatalog.class.getSimpleName();
+    private static final String TAG = RetrofitOfferCatalog.class.getSimpleName();
 
     private final BookApi mRetrofitBookApi;
 
-    public RetrofitDiscountCatalog(BookApi mRetrofitBookApi) {
+    public RetrofitOfferCatalog(BookApi mRetrofitBookApi) {
         this.mRetrofitBookApi = mRetrofitBookApi;
     }
 
-    public RetrofitDiscountCatalog(BookService bookService) {
+    public RetrofitOfferCatalog(BookService bookService) {
         this(new RetrofitBookApi(bookService));
     }
 
     @Override
-    public void list(List<Book> items, final DiscountCatalogCallback callback) {
+    public void list(List<Book> items, final OfferCatalogCallback callback) {
         String joinedIsbnList = "";
         for (Book book : items) {
             // TODO: unit test
@@ -35,7 +36,7 @@ public class RetrofitDiscountCatalog implements com.github.geekarist.hp2.bestoff
         mRetrofitBookApi.listCommercialOffers(joinedIsbnList, new BookApi.BookApiCallback() {
             @Override
             public void onResponse(BookDiscountCatalog response) {
-                List<BookDiscount> offers = response.offers;
+                List<Offer> offers = response.offers;
                 callback.onListResult(offers);
             }
 
