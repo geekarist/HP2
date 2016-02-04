@@ -2,7 +2,9 @@ package com.github.geekarist.hp2.bestoffer.discount;
 
 import android.support.annotation.NonNull;
 
-import com.github.geekarist.hp2.Book;
+import com.github.geekarist.hp2.domain.Book;
+import com.github.geekarist.hp2.domain.Discount;
+import com.github.geekarist.hp2.domain.MinusDiscount;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;

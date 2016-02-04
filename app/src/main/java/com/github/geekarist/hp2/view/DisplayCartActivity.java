@@ -1,4 +1,4 @@
-package com.github.geekarist.hp2;
+package com.github.geekarist.hp2.view;
 
 import android.content.Intent;
 import android.graphics.Paint;
@@ -10,8 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.github.geekarist.hp2.bestoffer.BestOffer;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
+import com.github.geekarist.hp2.R;
+import com.github.geekarist.hp2.domain.BestOffer;
+import com.github.geekarist.hp2.domain.Book;
+import com.github.geekarist.hp2.domain.DiscountCatalog;
+import com.github.geekarist.hp2.model.HenriPotierDiscountCatalog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

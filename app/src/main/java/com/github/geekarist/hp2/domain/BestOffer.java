@@ -1,9 +1,4 @@
-package com.github.geekarist.hp2.bestoffer;
-
-import com.github.geekarist.hp2.Book;
-import com.github.geekarist.hp2.bestoffer.discount.Discount;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
+package com.github.geekarist.hp2.domain;
 
 import java.util.List;
 

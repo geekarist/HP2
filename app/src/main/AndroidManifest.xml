@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.geekarist.hp2">
+<manifest
+    package="com.github.geekarist.hp2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListBooksActivity">
+        <activity android:name=".view.ListBooksActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,18 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BookDetailActivity"
-            android:parentActivityName=".ListBooksActivity">
+            android:name=".view.BookDetailActivity"
+            android:parentActivityName=".view.ListBooksActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListBooksActivity" />
+                android:value=".view.ListBooksActivity"/>
         </activity>
         <activity
-            android:name=".DisplayCartActivity"
-            android:parentActivityName=".ListBooksActivity">
+            android:name=".view.DisplayCartActivity"
+            android:parentActivityName=".view.ListBooksActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ListBooksActivity" />
+                android:value=".view.ListBooksActivity"/>
         </activity>
     </application>
 

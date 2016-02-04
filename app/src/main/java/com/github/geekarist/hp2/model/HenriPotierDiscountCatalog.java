@@ -1,13 +1,14 @@
-package com.github.geekarist.hp2;
+package com.github.geekarist.hp2.model;
 
 import android.util.Log;
 
-import com.github.geekarist.hp2.bestoffer.discount.Discount;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalog;
-import com.github.geekarist.hp2.bestoffer.discount.DiscountCatalogCallback;
-import com.github.geekarist.hp2.bestoffer.discount.MinusDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.PercentageDiscount;
-import com.github.geekarist.hp2.bestoffer.discount.SliceDiscount;
+import com.github.geekarist.hp2.domain.Book;
+import com.github.geekarist.hp2.domain.Discount;
+import com.github.geekarist.hp2.domain.DiscountCatalog;
+import com.github.geekarist.hp2.domain.DiscountCatalogCallback;
+import com.github.geekarist.hp2.domain.MinusDiscount;
+import com.github.geekarist.hp2.domain.PercentageDiscount;
+import com.github.geekarist.hp2.domain.SliceDiscount;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class HenriPotierDiscountCatalog implements DiscountCatalog {
             if (!"".equals(joinedIsbnList)) {
                 joinedIsbnList += ',';
             }
-            joinedIsbnList += book.isbn;
+            joinedIsbnList += book.getIsbn();
         }
 
         mBookService.listCommercialOffers(joinedIsbnList).enqueue(new retrofit.Callback<BookDiscountCatalog>() {

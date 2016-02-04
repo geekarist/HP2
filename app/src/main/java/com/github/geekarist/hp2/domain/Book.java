@@ -1,4 +1,4 @@
-package com.github.geekarist.hp2;
+package com.github.geekarist.hp2.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -15,6 +15,7 @@ public class Book implements Parcelable {
             return new Book[size];
         }
     };
+
     final String title;
     final String isbn;
     final double price;
@@ -49,5 +50,17 @@ public class Book implements Parcelable {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getCover() {
+        return cover;
     }
 }

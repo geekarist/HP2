@@ -1,22 +1,24 @@
-package com.github.geekarist.hp2;
+package com.github.geekarist.hp2.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.github.geekarist.hp2.R;
+import com.github.geekarist.hp2.domain.Book;
+import com.github.geekarist.hp2.model.BookService;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
-import retrofit.http.GET;
 
 public class ListBooksActivity extends AppCompatActivity {
 
@@ -55,11 +57,6 @@ public class ListBooksActivity extends AppCompatActivity {
 
     private void fetchBooks() {
         mBookService.listBooks().enqueue(new FetchBookCallback(this));
-    }
-
-    public interface BookService {
-        @GET("/books")
-        Call<List<Book>> listBooks();
     }
 
     private static class FetchBookCallback implements Callback<List<Book>> {
