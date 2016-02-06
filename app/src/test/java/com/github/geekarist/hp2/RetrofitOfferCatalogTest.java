@@ -1,7 +1,9 @@
 package com.github.geekarist.hp2;
 
-import com.github.geekarist.hp2.bestoffer.discount.Offer;
-import com.github.geekarist.hp2.bestoffer.discount.OfferCatalog;
+import com.github.geekarist.hp2.data.RetrofitOfferCatalog;
+import com.github.geekarist.hp2.domain.bestoffer.BookDiscountCatalog;
+import com.github.geekarist.hp2.domain.bestoffer.discount.Offer;
+import com.github.geekarist.hp2.domain.bestoffer.discount.OfferCatalog;
 
 import org.junit.Test;
 

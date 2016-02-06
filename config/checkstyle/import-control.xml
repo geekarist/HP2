@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE import-control PUBLIC
+    "-//Puppy Crawl//DTD Import Control 1.1//EN"
+    "http://www.puppycrawl.com/dtds/import_control_1_1.dtd">
+
+<import-control pkg="com.github.geekarist.hp2">
+    <subpackage name="presentation">
+        <allow pkg="android"/>
+        <allow pkg="data"/>
+        <allow pkg="domain"/>
+        <allow pkg="java"/>
+    </subpackage>
+    <subpackage name="data">
+        <allow pkg="retrofit"/>
+        <allow pkg="java"/>
+    </subpackage>
+    <subpackage name="domain">
+        <allow pkg="java"/>
+    </subpackage>
+</import-control>
