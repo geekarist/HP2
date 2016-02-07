@@ -4,17 +4,20 @@
     "http://www.puppycrawl.com/dtds/import_control_1_1.dtd">
 
 <import-control pkg="com.github.geekarist.hp2">
+    <allow pkg="java"/>
     <subpackage name="presentation">
+        <allow pkg="com.github.geekarist.hp2.presentation"/>
+        <allow pkg="com.github.geekarist.hp2.data"/>
+        <allow pkg="com.github.geekarist.hp2.domain"/>
         <allow pkg="android"/>
-        <allow pkg="data"/>
-        <allow pkg="domain"/>
-        <allow pkg="java"/>
+        <allow pkg="com.bumptech.glide"/>
     </subpackage>
     <subpackage name="data">
+        <allow pkg="com.github.geekarist.hp2.data"/>
+        <allow pkg="com.github.geekarist.hp2.domain"/>
         <allow pkg="retrofit"/>
-        <allow pkg="java"/>
     </subpackage>
     <subpackage name="domain">
-        <allow pkg="java"/>
+        <allow pkg="com.github.geekarist.hp2.domain"/>
     </subpackage>
 </import-control>
