@@ -15,7 +15,7 @@ public class BestOffer {
         this.mOfferCatalog = offerCatalog;
     }
 
-    public void calculate(final BestOffer.Callback callback) {
+    public void calculate(final SuccessCallback successCallback, final FailureCallback failure) {
         mOfferCatalog.list(cart.getItems(), discounts -> {
             double maxAmount = 0;
             for (Offer discount : discounts) {
@@ -25,11 +25,15 @@ public class BestOffer {
                     maxAmount = amount;
                 }
             }
-            callback.apply(maxAmount);
-        });
+            successCallback.apply(maxAmount);
+        }, failure::handle);
     }
 
-    public interface Callback {
+    public interface SuccessCallback {
         void apply(double bestValue);
+    }
+
+    public interface FailureCallback {
+        void handle(Throwable t);
     }
 }

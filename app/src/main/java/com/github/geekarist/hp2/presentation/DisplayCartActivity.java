@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.github.geekarist.hp2.R;
@@ -24,6 +25,7 @@ public class DisplayCartActivity extends AppCompatActivity {
 
     private static final String EXTRA_BOOK = "BOOK";
     private static final String BOOKS_BUNDLE_KEY = "BOOKS";
+    private static final String TAG = DisplayCartActivity.class.getSimpleName();
 
     private RecyclerView mCartListView;
     private ListBooksAdapter mAdapter;
@@ -70,7 +72,9 @@ public class DisplayCartActivity extends AppCompatActivity {
         mBookBestOffer = new BestOffer(mAdapter, offerCatalog);
 
         final TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
-        mBookBestOffer.calculate(bestValue -> totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - bestValue)));
+        mBookBestOffer.calculate(
+                bestValue -> totalDiscountText.setText(getString(R.string.cart_total_discount, mAdapter.totalPrice() - bestValue)),
+                error -> Log.e(TAG, "Error while listing commercial offers", error));
     }
 
     @Override

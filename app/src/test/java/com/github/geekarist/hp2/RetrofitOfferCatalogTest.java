@@ -5,6 +5,7 @@ import com.github.geekarist.hp2.domain.bestoffer.BookDiscountCatalog;
 import com.github.geekarist.hp2.domain.bestoffer.discount.Offer;
 import com.github.geekarist.hp2.domain.bestoffer.discount.OfferCatalog;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class RetrofitOfferCatalogTest {
             // Then
             assertThat(discounts).containsOnlyElementsOf(
                     asList(new Offer("slice", 5, 100), new Offer("percentage", 5, 0), new Offer("minus", 5, 0)));
-        });
+        }, error -> Assertions.fail("Error should not happen"));
     }
 
 }

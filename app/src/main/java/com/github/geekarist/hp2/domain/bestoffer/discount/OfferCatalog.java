@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface OfferCatalog {
 
-    void list(List<ParcelableBook> items, OfferCatalogCallback callback);
+    void list(List<ParcelableBook> items, OfferCatalogCallback.Success callback, OfferCatalogCallback.Failure failure);
 }
