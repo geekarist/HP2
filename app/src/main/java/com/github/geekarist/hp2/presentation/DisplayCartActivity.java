@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.github.geekarist.hp2.R;
 import com.github.geekarist.hp2.data.RetrofitOfferCatalog;
+import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.BestOffer;
 import com.github.geekarist.hp2.domain.bestoffer.discount.OfferCatalog;
 import com.google.gson.Gson;
@@ -32,9 +33,9 @@ public class DisplayCartActivity extends AppCompatActivity {
 
     private BestOffer mBookBestOffer;
 
-    public static Intent newAddToCartIntent(BookDetailActivity bookDetailActivity, ParcelableBook book) {
+    public static Intent newAddToCartIntent(BookDetailActivity bookDetailActivity, Book book) {
         Intent intent = new Intent(bookDetailActivity, DisplayCartActivity.class);
-        intent.putExtra(EXTRA_BOOK, book);
+        intent.putExtra(EXTRA_BOOK, new ParcelableBook(book));
         return intent;
     }
 
@@ -92,7 +93,7 @@ public class DisplayCartActivity extends AppCompatActivity {
         return new Gson().fromJson(booksAsJson, typeOfBookList);
     }
 
-    private String serialize(List<ParcelableBook> books) {
+    private String serialize(List<Book> books) {
         return new Gson().toJson(books);
     }
 }

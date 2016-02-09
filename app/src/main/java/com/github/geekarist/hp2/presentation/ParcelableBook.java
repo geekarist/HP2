@@ -19,11 +19,15 @@ public class ParcelableBook extends Book implements Parcelable {
     };
 
     public ParcelableBook(String title, String isbn, double price, String cover) {
-        super(title, isbn, cover, price);
+        super(title, isbn, price, cover);
     }
 
     protected ParcelableBook(Parcel in) {
-        super(in.readString(), in.readString(), in.readString(), in.readDouble());
+        super(in.readString(), in.readString(), in.readDouble(), in.readString());
+    }
+
+    public ParcelableBook(Book book) {
+        this(book.getTitle(), book.getIsbn(), book.getPrice(), book.getCover());
     }
 
     @Override
@@ -33,6 +37,7 @@ public class ParcelableBook extends Book implements Parcelable {
         dest.writeDouble(getPrice());
         dest.writeString(getCover());
     }
+
     @Override
     public int describeContents() {
         return 0;

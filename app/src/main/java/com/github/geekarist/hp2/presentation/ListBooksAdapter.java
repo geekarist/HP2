@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.geekarist.hp2.R;
+import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.Cart;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.ViewHolder> implements Cart {
-    private List<ParcelableBook> mBooks;
+    private List<Book> mBooks;
 
     public ListBooksAdapter() {
         mBooks = new ArrayList<>();
@@ -53,22 +54,22 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
     // TODO: unit test
     public double totalPrice() {
         double total = 0;
-        for (ParcelableBook b : mBooks) {
+        for (Book b : mBooks) {
             total += b.getPrice();
         }
         return total;
     }
 
     @Override
-    public List<ParcelableBook> getItems() {
+    public List<Book> getItems() {
         return mBooks;
     }
 
-    public List<ParcelableBook> getBooks() {
+    public List<Book> getBooks() {
         return mBooks;
     }
 
-    public void setBooks(List<ParcelableBook> books) {
+    public void setBooks(List<Book> books) {
         mBooks = books;
         notifyDataSetChanged();
     }
@@ -81,7 +82,7 @@ public class ListBooksAdapter extends RecyclerView.Adapter<ListBooksAdapter.View
         public TextView mTitleView;
         public TextView mPriceView;
         public ImageView mImageView;
-        public ParcelableBook mBook;
+        public Book mBook;
 
         public ViewHolder(View itemView) {
             super(itemView);

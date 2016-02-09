@@ -2,9 +2,9 @@ package com.github.geekarist.hp2.domain.bestoffer.discount;
 
 import android.support.annotation.NonNull;
 
+import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.DiscountCalculation;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.MinusDiscountCalculation;
-import com.github.geekarist.hp2.presentation.ParcelableBook;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Assert;
@@ -17,7 +17,7 @@ public class MinusDiscountTest {
     @Test
     public void shouldCalculate() throws Exception {
         DiscountCalculation discount = new MinusDiscountCalculation(15);
-        List<ParcelableBook> itemList = Arrays.asList(newBook(35), newBook(30));
+        List<Book> itemList = Arrays.asList(newBook(35), newBook(30));
 
         double amount = discount.apply(itemList);
 
@@ -25,7 +25,7 @@ public class MinusDiscountTest {
     }
 
     @NonNull
-    private ParcelableBook newBook(int price) {
-        return new ParcelableBook(null, null, price, null);
+    private Book newBook(int price) {
+        return new Book(null, null, price, null);
     }
 }

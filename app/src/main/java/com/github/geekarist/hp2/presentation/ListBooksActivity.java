@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.github.geekarist.hp2.R;
+import com.github.geekarist.hp2.domain.Book;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -56,10 +57,10 @@ public class ListBooksActivity extends AppCompatActivity {
 
     public interface BookService {
         @GET("/books")
-        Call<List<ParcelableBook>> listBooks();
+        Call<List<Book>> listBooks();
     }
 
-    private static class FetchBookCallback implements Callback<List<ParcelableBook>> {
+    private static class FetchBookCallback implements Callback<List<Book>> {
         private final WeakReference<ListBooksActivity> mActivityWeakReference;
 
         public FetchBookCallback(ListBooksActivity activity) {
@@ -67,7 +68,7 @@ public class ListBooksActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onResponse(Response<List<ParcelableBook>> response, Retrofit retrofit) {
+        public void onResponse(Response<List<Book>> response, Retrofit retrofit) {
             if (getActivity() != null && !getActivity().isFinishing()) {
                 getActivity().mBookListAdapter.setBooks(response.body());
                 getActivity().mFixConnectivityView.setVisibility(View.GONE);

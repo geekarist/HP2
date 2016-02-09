@@ -1,6 +1,6 @@
 package com.github.geekarist.hp2.domain.bestoffer.discount.calculation;
 
-import com.github.geekarist.hp2.presentation.ParcelableBook;
+import com.github.geekarist.hp2.domain.Book;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ public class SliceDiscountCalculation implements DiscountCalculation {
     }
 
     @Override
-    public double apply(List<ParcelableBook> items) {
+    public double apply(List<Book> items) {
         double sum = 0;
-        for (ParcelableBook item : items) {
+        for (Book item : items) {
             sum += item.getPrice();
         }
         return (int) (sum / mSliceValue) * mValue;

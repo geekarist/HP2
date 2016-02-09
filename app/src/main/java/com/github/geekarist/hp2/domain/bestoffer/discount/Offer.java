@@ -2,11 +2,11 @@ package com.github.geekarist.hp2.domain.bestoffer.discount;
 
 import android.util.Log;
 
+import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.DiscountCalculation;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.MinusDiscountCalculation;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.PercentageDiscountCalculation;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.SliceDiscountCalculation;
-import com.github.geekarist.hp2.presentation.ParcelableBook;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class Offer {
         return result;
     }
 
-    public double apply(List<ParcelableBook> items) {
+    public double apply(List<Book> items) {
         DiscountCalculation discount;
         if ("minus".equals(type)) {
             discount = new MinusDiscountCalculation(value);

@@ -1,8 +1,8 @@
 package com.github.geekarist.hp2.domain.bestoffer;
 
+import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.discount.Offer;
 import com.github.geekarist.hp2.domain.bestoffer.discount.OfferCatalog;
-import com.github.geekarist.hp2.presentation.ParcelableBook;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class BestOffer {
         mOfferCatalog.list(cart.getItems(), discounts -> {
             double maxAmount = 0;
             for (Offer discount : discounts) {
-                List<ParcelableBook> items = cart.getItems();
+                List<Book> items = cart.getItems();
                 double amount = discount.apply(items);
                 if (amount > maxAmount) {
                     maxAmount = amount;

@@ -11,14 +11,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.geekarist.hp2.R;
+import com.github.geekarist.hp2.domain.Book;
 
 public class BookDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_BOOK = "book";
 
-    public static Intent newIntent(Context context, @NonNull ParcelableBook book) {
+    public static Intent newIntent(Context context, @NonNull Book book) {
         Intent intent = new Intent(context, BookDetailActivity.class);
-        intent.putExtra(EXTRA_BOOK, book);
+        intent.putExtra(EXTRA_BOOK, new ParcelableBook(book));
         return intent;
     }
 
@@ -26,7 +27,7 @@ public class BookDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
-        final ParcelableBook book = getIntent().getParcelableExtra(EXTRA_BOOK);
+        final Book book = getIntent().getParcelableExtra(EXTRA_BOOK);
 
         TextView titleText = (TextView) findViewById(R.id.book_detail_title_text);
         titleText.setText(book.getTitle());

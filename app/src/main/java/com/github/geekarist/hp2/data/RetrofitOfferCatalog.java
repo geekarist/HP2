@@ -1,10 +1,10 @@
 package com.github.geekarist.hp2.data;
 
+import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.BookDiscountCatalog;
 import com.github.geekarist.hp2.domain.bestoffer.discount.Offer;
 import com.github.geekarist.hp2.domain.bestoffer.discount.OfferCatalog;
 import com.github.geekarist.hp2.domain.bestoffer.discount.OfferCatalogCallback;
-import com.github.geekarist.hp2.presentation.ParcelableBook;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class RetrofitOfferCatalog implements OfferCatalog {
     }
 
     @Override
-    public void list(List<ParcelableBook> items, final OfferCatalogCallback.Success success, OfferCatalogCallback.Failure failure) {
+    public void list(List<Book> items, final OfferCatalogCallback.Success success, OfferCatalogCallback.Failure failure) {
         String joinedIsbnList = "";
-        for (ParcelableBook book : items) {
+        for (Book book : items) {
             // TODO: unit test
             if (!"".equals(joinedIsbnList)) {
                 joinedIsbnList += ',';
