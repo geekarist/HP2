@@ -6,6 +6,7 @@
 <import-control pkg="com.github.geekarist.hp2">
     <allow pkg="java"/>
     <allow pkg="com.google.gson"/>
+    <allow pkg="com.github.geekarist.hp2.domain"/>
     <subpackage name="presentation">
         <allow pkg="com.github.geekarist.hp2"/>
         <allow pkg="android"/>
@@ -13,10 +14,6 @@
     </subpackage>
     <subpackage name="data">
         <allow pkg="com.github.geekarist.hp2.data"/>
-        <allow pkg="com.github.geekarist.hp2.domain"/>
         <allow pkg="retrofit"/>
-    </subpackage>
-    <subpackage name="domain">
-        <allow pkg="com.github.geekarist.hp2.domain"/>
     </subpackage>
 </import-control>
