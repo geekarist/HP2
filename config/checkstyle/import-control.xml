@@ -5,10 +5,9 @@
 
 <import-control pkg="com.github.geekarist.hp2">
     <allow pkg="java"/>
+    <allow pkg="com.google.gson"/>
     <subpackage name="presentation">
-        <allow pkg="com.github.geekarist.hp2.presentation"/>
-        <allow pkg="com.github.geekarist.hp2.data"/>
-        <allow pkg="com.github.geekarist.hp2.domain"/>
+        <allow pkg="com.github.geekarist.hp2"/>
         <allow pkg="android"/>
         <allow pkg="com.bumptech.glide"/>
     </subpackage>

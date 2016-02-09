@@ -8,18 +8,16 @@ import android.util.Log;
 import android.view.View;
 
 import com.github.geekarist.hp2.R;
+import com.github.geekarist.hp2.data.BookService;
 import com.github.geekarist.hp2.domain.Book;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Call;
 import retrofit.Callback;
-import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
-import retrofit.http.GET;
 
 public class ListBooksActivity extends AppCompatActivity {
 
@@ -42,10 +40,7 @@ public class ListBooksActivity extends AppCompatActivity {
         mFixConnectivityView = findViewById(R.id.fix_connectivity_group);
         mReloadButton = findViewById(R.id.reload_button);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://henri-potier.xebia.fr")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        mBookService = retrofit.create(BookService.class);
+        mBookService = HenriPotierApplication.getInstance().getBookService();
 
         mReloadButton.setOnClickListener(v -> fetchBooks());
         fetchBooks();
@@ -53,11 +48,6 @@ public class ListBooksActivity extends AppCompatActivity {
 
     private void fetchBooks() {
         mBookService.listBooks().enqueue(new FetchBookCallback(this));
-    }
-
-    public interface BookService {
-        @GET("/books")
-        Call<List<Book>> listBooks();
     }
 
     private static class FetchBookCallback implements Callback<List<Book>> {

@@ -1,7 +1,5 @@
 package com.github.geekarist.hp2.domain.bestoffer.discount;
 
-import android.util.Log;
-
 import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.DiscountCalculation;
 import com.github.geekarist.hp2.domain.bestoffer.discount.calculation.MinusDiscountCalculation;
@@ -63,8 +61,7 @@ public class Offer {
         } else if ("slice".equals(type)) {
             discount = new SliceDiscountCalculation(value, sliceValue);
         } else {
-            Log.w(TAG, String.format("Unknown offer [%s]", type));
-            return 0;
+            throw new AssertionError(String.format("Unknown offer [%s]", type));
         }
         return discount.apply(items);
     }
