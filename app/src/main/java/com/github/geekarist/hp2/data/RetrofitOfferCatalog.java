@@ -16,10 +16,6 @@ public class RetrofitOfferCatalog implements OfferCatalog {
         this.mRetrofitBookApi = mRetrofitBookApi;
     }
 
-    public RetrofitOfferCatalog(BookService bookService) {
-        this(new RetrofitBookApi(bookService));
-    }
-
     @Override
     public void list(List<Book> items, final OfferCatalogCallback.Success success, OfferCatalogCallback.Failure failure) {
         String joinedIsbnList = "";
@@ -31,7 +27,7 @@ public class RetrofitOfferCatalog implements OfferCatalog {
             joinedIsbnList += book.getIsbn();
         }
 
-        mRetrofitBookApi.listCommercialOffers(joinedIsbnList, new BookApi.BookApiCallback() {
+        mRetrofitBookApi.listCommercialOffers(joinedIsbnList, new BookApi.BookApiCallback<BookDiscountCatalog>() {
             @Override
             public void onResponse(BookDiscountCatalog response) {
                 List<Offer> offers = response.getOffers();

@@ -1,12 +1,17 @@
 package com.github.geekarist.hp2.data;
 
+import com.github.geekarist.hp2.domain.Book;
 import com.github.geekarist.hp2.domain.bestoffer.BookDiscountCatalog;
 
-public interface BookApi {
-    void listCommercialOffers(String joinedIsbnList, BookApiCallback callback);
+import java.util.List;
 
-    interface BookApiCallback {
-        void onResponse(BookDiscountCatalog catalog);
+public interface BookApi {
+    void listCommercialOffers(String joinedIsbnList, BookApiCallback<BookDiscountCatalog> callback);
+
+    void listBooks(BookApiCallback<List<Book>> callback);
+
+    interface BookApiCallback<T> {
+        void onResponse(T response);
 
         void onFailure(Throwable t);
     }

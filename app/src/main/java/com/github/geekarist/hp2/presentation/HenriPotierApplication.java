@@ -2,6 +2,7 @@ package com.github.geekarist.hp2.presentation;
 
 import android.app.Application;
 
+import com.github.geekarist.hp2.data.BookApi;
 import com.github.geekarist.hp2.data.BookService;
 import com.github.geekarist.hp2.data.BookServiceFactory;
 
@@ -26,4 +27,7 @@ public class HenriPotierApplication extends Application {
         return mBookService;
     }
 
+    public BookApi getBookApi() {
+        return null;
+    }
 }

@@ -8,16 +8,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.github.geekarist.hp2.R;
-import com.github.geekarist.hp2.data.BookService;
+import com.github.geekarist.hp2.data.BookApi;
 import com.github.geekarist.hp2.domain.Book;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 public class ListBooksActivity extends AppCompatActivity {
 
@@ -27,7 +23,7 @@ public class ListBooksActivity extends AppCompatActivity {
     private View mFixConnectivityView;
     private View mReloadButton;
     private RecyclerView mBookListView;
-    private BookService mBookService;
+    private BookApi mBookApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +34,19 @@ public class ListBooksActivity extends AppCompatActivity {
         mBookListAdapter = new ListBooksAdapter();
         mBookListView.setAdapter(mBookListAdapter);
         mFixConnectivityView = findViewById(R.id.fix_connectivity_group);
+
+        mBookApi = HenriPotierApplication.getInstance().getBookApi();
+
         mReloadButton = findViewById(R.id.reload_button);
-
-        mBookService = HenriPotierApplication.getInstance().getBookService();
-
         mReloadButton.setOnClickListener(v -> fetchBooks());
         fetchBooks();
     }
 
     private void fetchBooks() {
-        mBookService.listBooks().enqueue(new FetchBookCallback(this));
+        mBookApi.listBooks(new FetchBookCallback(this));
     }
 
-    private static class FetchBookCallback implements Callback<List<Book>> {
+    private static class FetchBookCallback implements BookApi.BookApiCallback<List<Book>> {
         private final WeakReference<ListBooksActivity> mActivityWeakReference;
 
         public FetchBookCallback(ListBooksActivity activity) {
@@ -58,9 +54,9 @@ public class ListBooksActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onResponse(Response<List<Book>> response, Retrofit retrofit) {
+        public void onResponse(List<Book> response) {
             if (getActivity() != null && !getActivity().isFinishing()) {
-                getActivity().mBookListAdapter.setBooks(response.body());
+                getActivity().mBookListAdapter.setBooks(response);
                 getActivity().mFixConnectivityView.setVisibility(View.GONE);
             }
         }

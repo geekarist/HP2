@@ -69,7 +69,7 @@ public class DisplayCartActivity extends AppCompatActivity {
         totalValueText.setText(getString(R.string.cart_total_value, mAdapter.totalPrice()));
         totalValueText.setPaintFlags(totalValueText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        OfferCatalog offerCatalog = new RetrofitOfferCatalog(HenriPotierApplication.getInstance().getBookService());
+        OfferCatalog offerCatalog = new RetrofitOfferCatalog(HenriPotierApplication.getInstance().getBookApi());
         mBookBestOffer = new BestOffer(mAdapter, offerCatalog);
 
         final TextView totalDiscountText = (TextView) findViewById(R.id.cart_total_discount_text);
